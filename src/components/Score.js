@@ -1,8 +1,9 @@
 import { useState } from "react";
 
-function Score() {
+
+function Score(props) {
     return(
-        <div>100</div>
+        <div className="score">{props.score}</div>
     )
 }   
 
