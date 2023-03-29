@@ -15,21 +15,35 @@ function App() {
   return letterStatus
 }
 
+const foundLetter = (letter) => {
+  let newLetterObject = {...letters}
+  newLetterObject[letter] = true
+  setLetters(newLetterObject)
+  changeScore(letter)
+}
+
+const changeScore = (letter) => {
+  let newScore = score
+  if (solution.word.includes(letter))
+    setScore(newScore + 5)
+  else 
+    setScore(newScore - 20)
+}
+
+
 const lettersObject = generateLetterStatuses()
 
-const [letterStatus, setLetters]  = useState(lettersObject)
+const [letters, setLetters]  = useState(lettersObject)
 const [solution, setSolution] = useState({word: "BATMAN", hint: "He is Vengeance, he is the Knight, he is ..."})
 const [score, setScore] = useState(100)
 
   return(
     <div>
       <Score score={score} />
-      <Solution letters={letterStatus} solution={solution} />
+      <Solution letters={letters} solution={solution} />
 
       <div className='letters'>
-        <Letters letters={letterStatus}>
-          <Letter></Letter><Letter></Letter>
-        </Letters>
+        <Letters eventHandler={foundLetter} letters={letters} />
       </div>
     </div>
   )

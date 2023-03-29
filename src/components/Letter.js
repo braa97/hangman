@@ -1,8 +1,13 @@
 import { useState } from "react";
 
 function Letter(props) {
+
+    const foundLetter = () => {
+        props.eventHandler(props.letter)
+    }
+
     return(
-        <span className="single-letter"> {props.letter} </span>
+        <span onClick={foundLetter} className={props.nameOfClass}> {props.letter} </span>
     )
 }
 
